@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web RTC Practice</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f1f1f1;
+        }
+        
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video class="video" autoplay playsinline muted></video>
+    </div>
+
+    <script>
+        let constraint = {'video': true, 'audio': true};
+        navigator.mediaDevices.getUserMedia(constraint)
+        .then(function (stream) {
+            let video = document.querySelector('video');
+            video.srcObject = stream;
+            video.play();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    </script>
+</body>
+</html>
